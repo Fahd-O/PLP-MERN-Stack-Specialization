@@ -7,7 +7,7 @@ const connectDB = async ()=> {
             useNewUrlParser: true,
             useUnifiedTopology: true
         });
-        console.log('MongoDB Connected... Week 2 Express in focus');
+        console.log('MongoDB Connected... Week 2 Express in focus, like seriously');
     } catch (error) {
         console.error(error.message);
         process.exit(1);
