@@ -1,10 +1,13 @@
 import { useState } from "react";
 
 export default function studentForm(){
+    const [ form, setForm ] = useState({name:"", email:"", age:""});
+
+    const handleChange(){}
 
 
     return(
-        <form>
+        <form onSubmit={handleSubmit} className="rounded-xl border bg-white p-4 flex flex-wrap gap-2">
             <input 
                 name="studentEnteredName"
                 value={form.studentEnteredName}
