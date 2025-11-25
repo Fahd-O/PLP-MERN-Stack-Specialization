@@ -3,7 +3,10 @@ import { useState } from "react";
 export default function studentForm(){
     const [ form, setForm ] = useState({name:"", email:"", age:""});
 
-    const handleChange(){}
+    const handleChange = e => {
+        const {name, value} = e.target;
+        setForm(f => ({ ...f, [name]: value }));
+    }
 
 
     return(
