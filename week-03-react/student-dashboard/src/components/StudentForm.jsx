@@ -13,7 +13,9 @@ export default function studentForm(){
 
     const handleSubmit (e){
         e.preventDefault();
-        if(!form.name || !form.email || !form.age) return null;
+        if(!form.name || !form.email || !form.age) return;
+
+        onSubmit({...form, age:Number(form.age)})
     }
 
     return(
