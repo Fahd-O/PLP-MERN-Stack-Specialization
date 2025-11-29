@@ -6,17 +6,18 @@ export default function studentForm(){
     const handleChange = e => {
         const {name, value} = e.target;
         setForm(f => ({ ...f, [name]: value }));
-    }
+    };
     // f = (name:"",email:"",age:"") - previous state of our form
     // ...f = copies and pastes the previous state of our form
     // f = (name:"Abu Masjid", email:"realabiolafahad@gmail.com", age:"26")
 
-    const handleSubmit (e){
+    const handleSubmit = (e) => {
         e.preventDefault();
         if(!form.name || !form.email || !form.age) return;
 
-        onSubmit({...form, age:Number(form.age)})
-    }
+        onSubmit({...form, age:Number(form.age)});
+        setForm({ name:"", email:"", age:"" });
+    };
 
     return(
         <form onSubmit={handleSubmit} className="rounded-xl border bg-white p-4 flex flex-wrap gap-2">
