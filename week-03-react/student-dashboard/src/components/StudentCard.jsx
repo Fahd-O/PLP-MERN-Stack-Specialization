@@ -1,0 +1,26 @@
+import { useState } from "react";
+
+export default function studentCard ({ student, onEdit, onDelete }){
+    const [edit, setEdit] = useState(false);
+    
+    
+    return(
+        <div className="rounded-xl border bg-white p-4 shadow-sm">
+            {!edit ?(
+                <div className="flex justify-between">
+                    <div>
+                        <h3 className="text-lg font-semibold">{student.name}</h3>
+                        <p className="text-slate-600 text-sm">{student.email}</p>
+                        <p className="text-slate-600 text-sm">Age: {student.age}</p>
+                    </div>
+                    <div className="flex gap-2">
+                        <button onClick={()=> setEdit(true)} className="border px-3 py-1 rounded-lg text-sm">Edit</button>
+                        <button onClick={()=> onDelete(student._id)} className="bg-red-600 text-white px-3 py-1 rounded-lg text-sm">Delete</button>
+                    </div>
+                </div>
+            ):(
+                <div></div>
+            )}
+        </div>
+    )
+}
