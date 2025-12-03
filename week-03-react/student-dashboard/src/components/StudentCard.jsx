@@ -2,6 +2,7 @@ import { useState } from "react";
 
 export default function studentCard ({ student, onEdit, onDelete }){
     const [edit, setEdit] = useState(false);
+    const [draft, setDraft] = useState(student);
     
     
     return(
@@ -19,7 +20,28 @@ export default function studentCard ({ student, onEdit, onDelete }){
                     </div>
                 </div>
             ):(
-                <div></div>
+                <form>
+                    <input
+                        className="border rounded-lg px-3 py-1 w-full"
+                        value={draft.name}
+                        onChange={e=> setDraft({ ...draft, name:e.target.value})}
+                    />
+                    <input
+                        className="border rounded-lg px-3 py-1 w-full"
+                        value={draft.email}
+                        onChange={e=> setDraft({ ...draft, email:e.target.value})}
+                    />
+                    <input
+                        className="border rounded-lg px-3 py-1 w-full"
+                        value={draft.age}
+                        onChange={e=> setDraft({ ...draft, age:Number (e.target.value)})}
+                    />
+
+                    <div>
+                        <button className="bg-green-600 text-white px-3 py-1 rounded-lg text-sm">Save</button>
+                        <button type="button" onClick={()=>setEdit(false)} className="border px-3 py-1 rounded-lg text-sm">Cancel</button>
+                    </div>
+                </form>
             )}
         </div>
     )
