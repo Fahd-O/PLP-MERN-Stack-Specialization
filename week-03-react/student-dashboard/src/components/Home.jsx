@@ -24,8 +24,13 @@ export default function Home(){
     }, {});
 
     async function handleAdd(student) {
-        const create = await createStudent(student);
+        const created = await createStudent(student);
         setStudent(prev=>[created, ...prev]);
+    }
+
+    async function handleEdit(st) {
+        const updated = await updateStudent(st_id, st);
+        setStudent(prev=>prev.map(x=>x._id===st_id?updated:x));
     }
 
 
