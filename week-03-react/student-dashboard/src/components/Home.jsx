@@ -8,6 +8,7 @@ export default function Home(){
     const [ loading, setLoading ] = useState(false);
     const [ error, setError ] = useState("");
     
+    // This is fetching - RETRIEVE - R
     useEffect( () => {
         (async() => {
             try {
@@ -23,16 +24,32 @@ export default function Home(){
         })();
     }, {});
 
+    // This is adding - CREATE - C
     async function handleAdd(student) {
         const created = await createStudent(student);
         setStudent(prev=>[created, ...prev]);
     }
 
+    // This is updating - UPDATE - U
     async function handleEdit(st) {
-        const updated = await updateStudent(st_id, st);
-        setStudent(prev=>prev.map(x=>x._id===st_id?updated:x));
+        const updated = await updateStudent(st._id, st);
+        setStudent(prev=>prev.map(x=>x._id===st._id?updated:x));
     }
 
+    // This is deleting - DELETE - D
+    async function handleDelete(id) {
+        await deleteStudent(id);
+        setStudent(prev=>prev.filter(x=>x._id!==id));
+    }
 
-    
+    return (
+        <main>
+            <StudentForm onSubmit="handleAdd"/>
+            {loading&& <p>Loadzing...</p>}
+            {error&& <p className="text-red-600">{error}</p>}
+            {student.map(s=>
+                <StudentCard key={s._id} student={s} onEdit={handleEdit} onDelete={handleDelete} />
+            )}
+        </main>
+    );
 }
