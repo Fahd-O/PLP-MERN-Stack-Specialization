@@ -4,7 +4,7 @@ import StudentForm from "./StudentForm";
 import { fetchStudents, createStudent, updateStudent, deleteStudent } from "../lib/api"
 
 export default function Home(){
-    const [ student, setStudent ] = useState([]);
+    const [ students, setStudent ] = useState([]);
     const [ loading, setLoading ] = useState(false);
     const [ error, setError ] = useState("");
     
@@ -25,8 +25,8 @@ export default function Home(){
     }, {});
 
     // This is adding - CREATE - C
-    async function handleAdd(student) {
-        const created = await createStudent(student);
+    async function handleAdd(students) {
+        const created = await createStudent(students);
         setStudent(prev=>[created, ...prev]);
     }
 
@@ -47,8 +47,8 @@ export default function Home(){
             <StudentForm onSubmit="handleAdd"/>
             {loading&& <p>Loadzing...</p>}
             {error&& <p className="text-red-600">{error}</p>}
-            {student.map(s=>
-                <StudentCard key={s._id} student={s} onEdit={handleEdit} onDelete={handleDelete} />
+            {students.map(s=>
+                <StudentCard key={s._id} students={s} onEdit={handleEdit} onDelete={handleDelete} />
             )}
         </main>
     );
