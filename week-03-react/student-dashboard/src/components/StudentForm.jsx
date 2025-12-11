@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function studentForm(){
+export default function StudentForm({ onSubmit }){
     const [ form, setForm ] = useState({name:"", email:"", age:""});
 
     const handleChange = e => {
