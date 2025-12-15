@@ -23,21 +23,21 @@ export default function StudentForm({ onSubmit }){
         <form onSubmit={handleSubmit} className="rounded-xl border bg-white p-4 flex flex-wrap gap-2">
             <input 
                 name="studentEnteredName"
-                value={form.studentEnteredName}
+                value={form.name}
                 onChange={handleChange}
                 placeholder="Enter your name"
                 className="border rounded-lg px-3 py-2 flex-1"
             />
             <input 
                 name="studentEnteredEmail"
-                value={form.studentEnteredEmail}
+                value={form.email}
                 onChange={handleChange}
                 placeholder="Enter your email"
                 className="border rounded-lg px-3 py-2 flex-1"
             />
             <input 
                 name="studentEnteredAge"
-                value={form.studentEnteredAge}
+                value={form.age}
                 onChange={handleChange}
                 placeholder="Enter your age"
                 className="border rounded-lg px-3 py-2 flex-1"
