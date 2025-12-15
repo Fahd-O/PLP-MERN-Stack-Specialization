@@ -6,7 +6,7 @@ export async function fetchStudents() {
     return res.json();
 }
 
-export async function createStudents(data) {
+export async function createStudent(data) {
     const res = await fetch(`${API}/students`,{
         method:"POST",headers:{"Content-Type":"application/json"},
         body:JSON.stringify(data)});
