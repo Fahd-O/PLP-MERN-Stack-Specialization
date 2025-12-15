@@ -1,8 +1,8 @@
 import { useState } from "react";
 
-export default function studentCard ({ students, onEdit, onDelete }){
+export default function studentCard ({ student, onEdit, onDelete }){
     const [edit, setEdit] = useState(false);
-    const [draft, setDraft] = useState(students);
+    const [draft, setDraft] = useState(student);
     
     
     return(
@@ -10,17 +10,17 @@ export default function studentCard ({ students, onEdit, onDelete }){
             {!edit ?(
                 <div className="flex justify-between">
                     <div>
-                        <h3 className="text-lg font-semibold">{students.name}</h3>
-                        <p className="text-slate-600 text-sm">{students.email}</p>
-                        <p className="text-slate-600 text-sm">Age: {students.age}</p>
+                        <h3 className="text-lg font-semibold">{student.name}</h3>
+                        <p className="text-slate-600 text-sm">{student.email}</p>
+                        <p className="text-slate-600 text-sm">Age: {student.age}</p>
                     </div>
                     <div className="flex gap-2">
                         <button onClick={()=> setEdit(true)} className="border px-3 py-1 rounded-lg text-sm">Edit</button>
-                        <button onClick={()=> onDelete(students._id)} className="bg-red-600 text-white px-3 py-1 rounded-lg text-sm">Delete</button>
+                        <button onClick={()=> onDelete(student._id)} className="bg-red-600 text-white px-3 py-1 rounded-lg text-sm">Delete</button>
                     </div>
                 </div>
             ):(
-                <form>
+                <form onSubmit={handleSubmit}>
                     <input
                         className="border rounded-lg px-3 py-1 w-full"
                         value={draft.name}
