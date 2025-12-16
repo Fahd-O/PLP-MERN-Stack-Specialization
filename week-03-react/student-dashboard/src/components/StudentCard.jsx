@@ -1,13 +1,18 @@
 import { useState } from "react";
 
-export default function studentCard ({ student, onEdit, onDelete }){
+export default function StudentCard({ student, onEdit, onDelete }){
     const [edit, setEdit] = useState(false);
     const [draft, setDraft] = useState(student);
-    
-    
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        onEdit(draft);
+        setEdit(false);
+    };
+
     return(
         <div className="rounded-xl border bg-white p-4 shadow-sm">
-            {!edit ?(
+            {!edit ? (
                 <div className="flex justify-between">
                     <div>
                         <h3 className="text-lg font-semibold">{student.name}</h3>
@@ -16,27 +21,26 @@ export default function studentCard ({ student, onEdit, onDelete }){
                     </div>
                     <div className="flex gap-2">
                         <button onClick={()=> setEdit(true)} className="border px-3 py-1 rounded-lg text-sm">Edit</button>
-                        <button onClick={()=> onDelete(student._id)} className="bg-red-600 text-white px-3 py-1 rounded-lg text-sm">Delete</button>
+                        <button onClick={()=> onDelete(student._id)} className="bg-red-600 text-white px-3 py-1 rounded-lg text-sm">Del</button>
                     </div>
                 </div>
             ):(
                 <form onSubmit={handleSubmit}>
-                    <input
+                    <input 
                         className="border rounded-lg px-3 py-1 w-full"
                         value={draft.name}
-                        onChange={e=> setDraft({ ...draft, name:e.target.value})}
-                    />
-                    <input
+                        onChange={e=> setDraft({ ...draft, name:e.target.value})}/>
+                    <input 
                         className="border rounded-lg px-3 py-1 w-full"
                         value={draft.email}
                         onChange={e=> setDraft({ ...draft, email:e.target.value})}
-                    />
-                    <input
+                        />
+                    <input 
                         className="border rounded-lg px-3 py-1 w-full"
                         value={draft.age}
-                        onChange={e=> setDraft({ ...draft, age:Number (e.target.value)})}
-                    />
-
+                        onChange={e=> setDraft({ ...draft, age:Number(e.target.value)})}
+                        />
+                    
                     <div>
                         <button className="bg-green-600 text-white px-3 py-1 rounded-lg text-sm">Save</button>
                         <button type="button" onClick={()=>setEdit(false)} className="border px-3 py-1 rounded-lg text-sm">Cancel</button>
