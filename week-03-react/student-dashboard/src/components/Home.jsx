@@ -1,16 +1,15 @@
 import { useState, useEffect } from "react";
 import StudentCard from "../components/StudentCard";
 import StudentForm from "../components/StudentForm";
-import { fetchStudents, createStudent, updateStudent, deleteStudent } from "../lib/api"
+import { fetchStudents, createStudent, updateStudent, deleteStudent }  from "../lib/api"
 
 export default function Home(){
-    const [ students, setStudents ] = useState([]);
-    const [ loading, setLoading ] = useState(false);
-    const [ error, setError ] = useState("");
-    
-    // This is fetching - RETRIEVE - R
-    useEffect( () => {
-        (async() => {
+    const [students, setStudents] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
+
+    useEffect(()=>{
+        (async()=>{
             try {
                 setLoading(true);
                 const data = await fetchStudents();
@@ -22,22 +21,19 @@ export default function Home(){
         })();
     }, []);
 
-    // This is adding - CREATE - C
     async function handleAdd(student) {
         const created = await createStudent(student);
         setStudents(prev=>[created, ...prev]);
     }
 
-    // This is updating - UPDATE - U
     async function handleEdit(st) {
         const updated = await updateStudent(st._id, st);
         setStudents(prev=>prev.map(x=>x._id===st._id?updated:x))
     }
 
-    // This is deleting - DELETE - D
     async function handleDelete(id) {
-        await deleteStudent(id);
-        setStudents(prev=>prev.filter(x=>x._id!==id));
+        await deleteStudent(id)
+        setStudents(prev=> prev.filter(x=>x._id!==id));
     }
 
 
