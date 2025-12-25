@@ -32,19 +32,17 @@ router.put("/:id", async (req, res) => {
         { new: true }
     );
 
-    if (!updated) return res.status(404).json({ Message: "Mabrook!!! There was nothing there!" })
+    if (!updated) return res.status(404).json({ message: "Mabrook!!! There was nothing there!" });
+    res.json(updated);
 });
 
 //DELETE /api/notes/:id => DELETE
 router.delete("/:id", async (req, res) => {
     const { id } = req.params;
-    const { title, content } = req.body;
+    const result = await NotesContainer.deleteOne({ _id: id});
 
-    const d = await NotesContainer.findByIdAndUpdate(
-        id,
-        { $set: { title, content }},
-        { new: true }
-    );
-
-    if (!updated) return res.status(404).json({ Message: "Mabrook!!! There was nothing there!" })
+    if (result.deletedCount == 0) return res.status(404).json({ message: "There is nothing here for you to delete, bye bye..."});
+    res.json({ ok: true });
 });
+
+module.exports = router;
