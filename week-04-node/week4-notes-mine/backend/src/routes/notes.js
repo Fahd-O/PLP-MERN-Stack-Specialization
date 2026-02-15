@@ -5,7 +5,7 @@ const router = expressContainer.Router();
 
 // GET /api/notes?userId=abc123 -> List (optionally filter by Id ) => READ
 router.get("/", async (req, res) => {
-    const { userId } = req.body;
+    const { userId } = req.query;
     const filter = userId ? { userId } : {};
     const notes = await NotesContainer.find(filter).sort({ createdAt: -1 });
     res.json(notes);
@@ -18,7 +18,7 @@ router.post("/", async (req, res) => {
     if (!title) return res.status(400).json({ message: "Looks like someone forgot to supply the 'title'!" });
 
     const note = await NotesContainer.create({ title, content, userId });
-    return res.status(201).json(note);
+    res.status(201).json(note);
 });
 
 //PUT /api/notes/:id => UPDATE
@@ -41,7 +41,7 @@ router.delete("/:id", async (req, res) => {
     const { id } = req.params;
     const result = await NotesContainer.deleteOne({ _id: id});
 
-    if (result.deletedCount == 0) return res.status(404).json({ message: "There is nothing here for you to delete, bye bye..."});
+    if (result.deleteOne == 0) return res.status(404).json({ message: "There is nothing here for you to delete, bye bye..."});
     res.json({ ok: true });
 });
 
